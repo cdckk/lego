@@ -1,38 +1,63 @@
 <template>
   <div class="editor">
-    <!-- <a-layout :style="{ minHeight: '100vh' }" id="components-layout-fixed">
-      <a-layout-header class="header" style="height: 80px">
-        <div class="page-title" style="text-align: left; color: #fff">慕课乐高</div>
-      </a-layout-header>
-      <a-layout>
-        <a-layout-sider width="300" style="background: yellow">
-          <div class="sidebar-container">组件列表</div>
-        </a-layout-sider> -->
-        <a-layout style="padding: 0 24px 24px">
-          <a-layout-content>
-            <p>画布区域</p>
-            <div class="preview-list" id="canvas-area"></div>
-          </a-layout-content>
-        </a-layout>
-        
-        <!-- <a-layout-sider width="300" style="background: purple" class="setting-area">
-          组件属性
-        </a-layout-sider>
+    <a-layout style="padding: 0 24px 24px; height: 100vh;">
+      <a-layout-sider width="300" style="background: yellow">
+        <component-list @onListClick="addItem"></component-list>
+      </a-layout-sider>
+      <a-layout class="editor-area">
+        <a-layout-content>
+          <p>画布区域</p>
+          <div class="preview-list" id="canvas-area">
+            <!-- <div v-for="component in components" :key="component.id" :style="{ 'font-size': component.props.fonSize }">{{component.props.text}}</div> -->
+            <component
+              v-for="component in components"
+              :key="component.id"
+              :is="LText"
+              v-bind="component.props"
+              @click="handleDeleteClick(component.props)"
+            >
+            </component>
+          </div>
+        </a-layout-content>
       </a-layout>
-      
-      <a-layout-footer style="background-color: #D9DADF">
-        慕课网（imooc.com）版权所有 | 津ICP备200009号
-      </a-layout-footer>
-    </a-layout> -->
+      <a-layout-sider width="300" style="background: purple">右边</a-layout-sider>
+    </a-layout>
   </div>
 </template>
 
 <script setup lang="ts">
+import LText from '../components/LText.vue'
+import ComponentList from '../components/ComponentList.vue'
+import { computed, defineExpose } from 'vue'
+import { useStore } from 'vuex'
+import { GlobalDataProps } from '../store/index'
+
+
+const store = useStore<GlobalDataProps>()
+const components = computed(() => store.state.editor.components)
+
+const addItem = (props: any) => {
+  store.commit('addComponent', props)
+}
+const handleDeleteClick = (props: any) => {
+  store.commit('deleteComponent', props)
+}
+
+defineExpose({
+  LText
+})
 </script>
 
 <style scoped lang="less">
 .editor {
   height: 100%;
+}
+.preview-list {
+  margin: 0 auto;
+  // position: relative;
+  height: 200px;
+  width: 450px;
+  background-color: #fff;
 }
 // #components-layout-fixed {
 //   min-height: 100vh;
