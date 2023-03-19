@@ -7,6 +7,7 @@
         </div>
       </a-layout-header>
       <a-layout-content class="home-layout"> -->
+        <uploader></uploader>
         <div class="content-container">
           <template-list :list="testData"></template-list>
         </div>
@@ -23,6 +24,7 @@ import TemplateList from '../components/TemplateList.vue'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { GlobalDataProps } from '../store/index'
+import Uploader from '../components/Uploader.vue'
 
 const store = useStore<GlobalDataProps>()
 

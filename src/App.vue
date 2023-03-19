@@ -1,6 +1,8 @@
 <template>
   <!-- <Home></Home> -->
   <!-- <editor></editor> -->
+  <!-- <uploader drag listType="picture"></uploader> -->
+  <!-- <style-uploader></style-uploader> -->
   <div class="homepage-container" v-if="withHeader">
     <a-layout :style="{ minHeight: '100vh' }" id="components-layout-fixed">
       <a-layout-header class="header">
@@ -30,6 +32,8 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import UserProfile from './components/UserProfile.vue'
+import Uploader from './components/Uploader.vue'
+import StyleUploader from './components/StyleUploader.vue'
 // import Home from './views/Home.vue'
 // import Editor from './views/Editor.vue'
 
@@ -46,7 +50,7 @@ const withHeader = computed(() => {
 })
 </script>
 
-<style>
+<style lang="less">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -58,5 +62,27 @@ const withHeader = computed(() => {
 .header {
   display: flex;
   justify-content: space-between;
+}
+
+// .file-upload .upload-area {
+//   background-color: #efefef;
+//   border: 1px dashed #ccc;
+//   border-radius: 4px;
+//   cursor: pointer;
+//   padding: 20px;
+//   width: 360px;
+//   height: 180px;
+//   text-align: center;
+//   &:hover {
+//     border: 1px dashed #1890ff;
+//   }
+//   // 文件拖到了区域
+//   &.is-dragover {
+//     border: 2px dashed #1890ff;
+//     background-color: rgba(#1890ff, .2);
+//   }
+// }
+.upload-area img {
+  height: 100px;
 }
 </style>

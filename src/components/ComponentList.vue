@@ -3,7 +3,7 @@
     <component
       v-for="component in defaultTextTemplates"
       :key="component.tag"
-      :is="LText"
+      :is="mapToComponent[component.name]"
       v-bind="component"
       @click="handleListClick(component)"
     >
@@ -12,20 +12,59 @@
 </template>
 
 <script setup lang="ts">
+import { v4 as uuidv4} from 'uuid'
 import LText from './LText.vue'
 import { defaultTextTemplates } from '../defaultTemplates'
-import { defineEmits, defineExpose } from 'vue'
+import { defineEmits, defineExpose, ref, markRaw } from 'vue'
+import { ComponentData } from '../store/editor'
+import { imageDefaultProps, TextComponentProps } from "../defaultProps"
+import { message } from 'ant-design-vue'
+import { UploadResp } from '../extraType'
 
-const emit = defineEmits(['onListClick'])
+const mapToComponent = {
+  'LText': LText
+}
 
-const handleListClick = (component: any) => {
-  console.log('hha', component);
+const emit = defineEmits(['onListClick','onItemClick'])
+
+const lText = markRaw(LText)
+
+const handleListClick = (component: TextComponentProps) => {
+  // console.log('hha', component);
   emit("onListClick", component)
 }
-// defineExpose({
-//   onListClick
-// })
+const onItemClick = (props: TextComponentProps) => {
+  const componentData: ComponentData = {
+    id: uuidv4(),
+    name: 'l-text',
+    props
+  }
+  emit("onItemClick", componentData)
+}
+const onImageUpoded = (resp: UploadResp) => {
+  console.log(resp);
+  const componentData: ComponentData = {
+    name: 'l-image',
+    id: uuidv4(),
+    props: {
+      ...imageDefaultProps
+    }
+  }
+  message.success('上传成功')
+  componentData.props.src = resp.data.url
+  emit('onItemClick', componentData)
+}
+defineExpose({
+  // onListClick,
+  onItemClick,
+  onImageUpoded
+})
 </script>
 
 <style scoped lang="less">
+// .create-component-list {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+// }
 </style>

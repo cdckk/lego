@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false, //处理any报错
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -35,5 +36,6 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "jsx": "preserve"
 }
