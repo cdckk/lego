@@ -10,7 +10,7 @@ export interface CommonComponentProps {
   actionType: string;
   url: string;
   // size
-  height: string;
+  height: string | number;
   width: string | number;
   lineHeight: string;
   paddingLeft: string;
@@ -27,8 +27,8 @@ export interface CommonComponentProps {
   opacity: number;
   // position and x,y
   position: string;
-  left: number | string;
-  top: number | string;
+  left?: number | string;
+  top?: number | string;
   right: number;
   // src: string;
   href?: string;

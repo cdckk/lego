@@ -23,12 +23,15 @@
               class="editor-wrapper"
               v-for="component in components"
               :key="component.id"
+              :props="component.props"
               :id="component.id"
-              :active="component.id === (currentElement && currentElement.id)"
+              :active="false"
               @setActive="setActive"
+              @update-position="updatePosition"
             >
             <!-- @click="editor(component.props)" -->
               <component
+                class="wrapper-slot"
                 v-if="component.name === 'LText'"
                 :is="LText"
                 v-bind="component.props"  
@@ -41,10 +44,10 @@
                 :src="component.props.src"
                 :width="component.props.width"
               ></component>
-              <template #deleteBtn>
+              <!-- <template #deleteBtn> -->
                 <!-- stop用于阻止事件冒泡 -->
-                <a-button type="primary" @click.stop="onDeleteClick(component.props)">删除</a-button>
-              </template>
+                <!-- <a-button type="primary" @click.stop="onDeleteClick(component.props)">删除</a-button> -->
+              <!-- </template> -->
             </editor-wrapper>
           </div>
           </div>
@@ -165,6 +168,13 @@ const handleChange = (e: any) => {
   store.commit('updateComponent', e)
 }
 
+const updatePosition = (position: { top: string; left: string; id: string }) => {
+  console.log('position', position)
+  const { left, top, id } = position
+  store.commit('updateComponent', { key: 'left', value: left, id })
+  store.commit('updateComponent', { key: 'top', value: top, id })
+}
+
 // const handleLock = (data: { id: string; key: string; value: boolean; isRoot: boolean}) => {
 //   store.commit('updateComponent', data)
 // }
@@ -175,6 +185,9 @@ defineExpose({
 </script>
 
 <style scoped lang="less">
+// .wrapper-slot {
+//   position: static !important;
+// }
 .editor-template-area {
   margin-top: 50px;
 }
@@ -182,6 +195,7 @@ defineExpose({
   height: 100%;
 }
 .preview-list {
+  // position: fixed;
   margin: 0 auto;
   padding: 0;
   min-width: 375px;
@@ -202,10 +216,10 @@ defineExpose({
   overflow: hidden;
 }
 .editor-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 10px;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-around;
+  // margin-bottom: 10px;
 }
 
 // #components-layout-fixed {
