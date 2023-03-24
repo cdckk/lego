@@ -28,6 +28,7 @@
               :active="false"
               @setActive="setActive"
               @update-position="updatePosition"
+              @update-width-height="updateWidthHeight"
             >
             <!-- @click="editor(component.props)" -->
               <component
@@ -169,10 +170,19 @@ const handleChange = (e: any) => {
 }
 
 const updatePosition = (position: { top: string; left: string; id: string }) => {
-  console.log('position', position)
+  // console.log('position', position)
   const { left, top, id } = position
   store.commit('updateComponent', { key: 'left', value: left, id })
   store.commit('updateComponent', { key: 'top', value: top, id })
+}
+const updateWidthHeight = (data: { width: string; height: string; top: string; id: string }) => {
+  console.log('data', data);
+  const { width, height, top, id } = data
+  store.commit('updateComponent', { key: 'width', value: width, id})
+  store.commit('updateComponent', { key: 'height', value: height, id})
+  if (top) {
+    store.commit('updateComponent', { key: 'top', value: top, id})
+  }
 }
 
 // const handleLock = (data: { id: string; key: string; value: boolean; isRoot: boolean}) => {
@@ -195,7 +205,7 @@ defineExpose({
   height: 100%;
 }
 .preview-list {
-  // position: fixed;
+  position: relative;
   margin: 0 auto;
   padding: 0;
   min-width: 375px;

@@ -139,6 +139,8 @@ const postFile = (readyFile: UploadFile) => {
   // }
   
   formData.append(readyFile.name, readyFile.raw)
+  console.dir('formdata', formData);
+  
   readyFile.status = 'loading'
   axios.post(props.action, formData, {
     headers: {

@@ -39,7 +39,7 @@ export interface PageData {
 }
 
 export const testComponents: ComponentData[] = [
-  { id: uuidv4(), name: 'LText', layerName: '图层1', isLocked: false, isHidden: true, props: { ...textDefaultProps, text: 'hello', fontSize: '50px', color: 'red', lineHeight: '1', textAlign: 'left', fontFamily: '', width: '100px', height: '100px', backgroundColor: '#efefef', left: '10px', top: '10px'}},
+  { id: uuidv4(), name: 'LText', layerName: '图层1', isLocked: false, isHidden: true, props: { ...textDefaultProps, text: 'hello', fontSize: '50px', color: 'red', lineHeight: '1', textAlign: 'left', fontFamily: '', width: '100px', height: '100px', backgroundColor: '#efefef', left: '10px', top: '10px', position: 'absolute'}},
   // { id: uuidv4(), name: 'LText', layerName: '图层1', isLocked: false, isHidden: true, props: { ...textDefaultProps, text: 'hello', fontSize: '50px', color: 'red', lineHeight: '1', textAlign: 'left', fontFamily: ''}},
   // { id: uuidv4(), name: 'LText', layerName: '图层2', isLocked: false, isHidden: true, props: { ...textDefaultProps, text: 'hello2', fontSize: '25px', lineHeight: '1', textAlign: 'left' }},
   // { id: uuidv4(), name: 'LText', layerName: '图层3', isLocked: false, isHidden: true, props: { ...textDefaultProps, text: 'hello3', fontSize: '15px', actionType: 'url', url: 'https://www.baidu.com/', textAlign: 'left' }}
