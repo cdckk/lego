@@ -178,11 +178,12 @@ const updatePosition = (position: { top: string; left: string; id: string }) => 
 const updateWidthHeight = (data: { width: string; height: string; top: string; id: string }) => {
   console.log('data', data);
   const { width, height, top, id } = data
-  store.commit('updateComponent', { key: 'width', value: width, id})
-  store.commit('updateComponent', { key: 'height', value: height, id})
   if (top) {
     store.commit('updateComponent', { key: 'top', value: top, id})
   }
+  store.commit('updateComponent', { key: 'width', value: width, id})
+  store.commit('updateComponent', { key: 'height', value: height, id})
+  
 }
 
 // const handleLock = (data: { id: string; key: string; value: boolean; isRoot: boolean}) => {
@@ -219,7 +220,7 @@ defineExpose({
   overflow-y: auto;
   // position: fixed;
   // margin-top: 50px;
-  max-height: 80vh;
+  // max-height: 80vh;
 }
 .component-list {
   padding-top: 20px;

@@ -22,6 +22,7 @@
 <script setup lang="ts">
 import { defineEmits, defineProps, computed, ref, nextTick } from 'vue'
 import { pick } from 'lodash-es'
+import { initailHotKeys } from '../plugins/hotKey'
 type ResizeDirection = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 interface Position {
   left: number;
@@ -67,6 +68,7 @@ const calcMovePosition = (e: MouseEvent) => {
 }
 // 移动元素位置
 const startMove = (e: MouseEvent) => {
+  initailHotKeys(props.id)
   isMoving = true
   const currentElement = editorWrapper.value
   if (editorWrapper.value) {
@@ -114,7 +116,7 @@ const calcResize = (e: MouseEvent, direction: ResizeDirection, positions: Positi
     case 'top-right':
       width = clientX - left
       height = bottom - clientY
-      topVal = clientY + editorContainer.offsetTop
+      topVal = clientY - editorContainer.offsetTop
       return {
         width,
         height,

@@ -1,6 +1,7 @@
 <template>
   <div class="create-component-list">
     <component
+      class="component-item"
       v-for="component in defaultTextTemplates"
       :key="component.tag"
       :is="mapToComponent[component.name]"
@@ -14,8 +15,8 @@
 <script setup lang="ts">
 import { v4 as uuidv4} from 'uuid'
 import LText from './LText.vue'
-import { defaultTextTemplates } from '../defaultTemplates'
-import { defineEmits, defineExpose, ref, markRaw } from 'vue'
+import defaultTextTemplates from '../defaultTemplates'
+import { defineEmits, defineExpose, markRaw } from 'vue'
 import { ComponentData } from '../store/editor'
 import { imageDefaultProps, TextComponentProps } from "../defaultProps"
 import { message } from 'ant-design-vue'
@@ -67,4 +68,12 @@ defineExpose({
 //   flex-direction: column;
 //   justify-content: center;
 // }
+.component-item {
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+.component-item > * {
+  position: static !important;
+}
 </style>
